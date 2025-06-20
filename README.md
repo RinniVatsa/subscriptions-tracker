@@ -1,70 +1,86 @@
-# Getting Started with Create React App
+#  Subscription Tracker
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A responsive and user-friendly **Subscription Tracker App** built with React and Firebase that helps users manage their recurring expenses and subscriptions efficiently.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+-  **Firebase Authentication**
+  - **Email & Password login**
+  - **Google Sign-In**
+-  **Add / Edit / Delete Subscriptions**
+-  **Track Next Payment Dates**
+-  **Category Filtering**
+- **Search & Filter by Category or Frequency**
+-  **Pie Chart Visualization** of expenses by category
+-  **Responsive Design** with modern UI
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Tech uses
 
-### `npm test`
+- **Frontend:** React, CSS (Inline styling, Flexbox)
+- **Backend:** Firebase Authentication & Firestore
+- **Charting:** `recharts` library
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 📦 Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. **Clone the repository**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+git clone https://github.com/RinniVatsa/subscription-tracker.git
+cd subscription-tracker
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+2. **Install dependencies**
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+npm install
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+3. **Firebase Setup**
+- Create a Firebase project at [Firebase Console](https://console.firebase.google.com/)
+- Enable Authentication (Email/Password + Google)
+- Enable Firestore
+- Add your Firebase config to `src/services/firebase.js`
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```js
+// src/services/firebase.js
+const firebaseConfig = {
+   apiKey: "AIzaSyAEa4_WsSKp8mzxyPoOfcv9yzI0kCt99fA",
+    authDomain: "subscription-tracker-2c2ec.firebaseapp.com",
+        projectId: "subscription-tracker-2c2ec",
+    storageBucket: "subscription-tracker-2c2ec.appspot.com",
+    messagingSenderId: "829518921964",
+    appId: "1:829518921964:web:c15adeee4f0d2fb6ae25c9",
+    measurementId: "G-943NYB8MKX"
+  
+};
+```
 
-## Learn More
+4. **Start  app**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+npm start
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+##  Folder Structure
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
+src/
+├── components/
+│   ├── Auth/
+│   ├── Subscription/
+│   └── Charts/
+├── context/
+├── pages/
+├── services/
+└── App.js / index.js
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
