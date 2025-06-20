@@ -7,7 +7,7 @@ export const SubscriptionProvider = ({ children }) => {
     const [subscriptions, setSubscriptions] = useState([]);
 
     const addSubscription = (newSub) => {
-        const subWithId = {...newSub, id: uuidv4() }; // <-- Ensure unique ID
+        const subWithId = {...newSub, id: uuidv4() };
         setSubscriptions((prev) => [...prev, subWithId]);
     };
 

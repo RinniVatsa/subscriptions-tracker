@@ -21,7 +21,7 @@ const SubscriptionForm = () => {
         e.preventDefault();
         const newSub = {
             ...form,
-            id: uuidv4(), // ✅ give each item a unique ID
+            id: uuidv4(), // giving each item a unique ID
             amount: parseFloat(form.amount),
         };
         addSubscription(newSub);

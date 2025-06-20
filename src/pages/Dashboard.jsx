@@ -4,32 +4,46 @@ import SubscriptionList from '../components/Subscription/SubscriptionList';
 import ExpenseChart from '../components/ Charts/ExpenseChart';
 import { useSubscriptions } from '../ context/SubscriptionContext';
 
+
 const Dashboard = () => {
     const { subscriptions } = useSubscriptions();
     const [searchTerm, setSearchTerm] = useState('');
     const [categoryFilter, setCategoryFilter] = useState('');
     const [frequencyFilter, setFrequencyFilter] = useState('');
 
-    const filteredSubscriptions = subscriptions.filter((sub) => {
-        const matchesSearch = sub.name.toLowerCase().includes(searchTerm.toLowerCase());
-        const matchesCategory = categoryFilter ? sub.category === categoryFilter : true;
-        const matchesFrequency = frequencyFilter ? sub.frequency === frequencyFilter : true;
-        return matchesSearch && matchesCategory && matchesFrequency;
-    });
+    // Get unique category list
+    const uniqueCategories = subscriptions
+        .map((sub) => sub.category)
+        .filter((cat, index, arr) => cat && arr.indexOf(cat) === index);
 
-    const uniqueCategories = [...new Set(subscriptions.map((s) => s.category).filter(Boolean))];
+    // Filter logic
+    const filteredSubscriptions = subscriptions.filter((sub) => {
+        const name = (sub.name || '').toLowerCase();
+        const category = (sub.category || '').toLowerCase().trim();
+        const frequency = (sub.frequency || '').toLowerCase().trim();
+
+        const searchMatch = name.includes(searchTerm.toLowerCase().trim());
+        const categoryMatch = categoryFilter ?
+            category === categoryFilter.toLowerCase().trim() :
+            true;
+        const frequencyMatch = frequencyFilter ?
+            frequency === frequencyFilter.toLowerCase().trim() :
+            true;
+
+        return searchMatch && categoryMatch && frequencyMatch;
+    });
 
     return ( <
             div style = { containerStyle } >
             <
             h1 style = { headerStyle } > 📊Subscriptions Tracker < /h1>
 
-            { /* Add Subscription Form */ } <
+            <
             SubscriptionForm / >
 
-            { /* Expense Chart */ } {
+            {
                 subscriptions.length > 0 && ( <
-                    div style = { chartSectionStyle } >
+                    div style = { chartContainer } >
                     <
                     ExpenseChart / >
                     <
@@ -37,8 +51,8 @@ const Dashboard = () => {
                 )
             }
 
-            { /* Search and Filter */ } <
-            div style = { filterContainer } >
+            { /* Filters */ } <
+            div style = { filterSection } >
             <
             input type = "text"
             placeholder = "Search by name..."
@@ -56,10 +70,11 @@ const Dashboard = () => {
             }
             style = { inputStyle } >
             <
-            option value = "" > All Categories < /option> {
+            option value = "" > 📂All Categories < /option> {
             uniqueCategories.map((cat) => ( <
                 option key = { cat }
-                value = { cat } > { cat } < /option>
+                value = { cat } > { cat } <
+                /option>
             ))
         } <
         /select>
@@ -71,15 +86,16 @@ const Dashboard = () => {
     }
     style = { inputStyle } >
         <
-        option value = "" > All Frequencies < /option> <
+        option value = "" > ⏱️All Frequencies < /option> <
     option value = "monthly" > Monthly < /option> <
     option value = "yearly" > Yearly < /option> < /
     select > <
         /div>
 
-    { /* List of Subscriptions */ } {
+    { /* Subscriptions List */ } {
         filteredSubscriptions.length > 0 ? ( <
-            SubscriptionList / >
+            SubscriptionList subscriptions = { filteredSubscriptions }
+            />
         ) : ( <
             p style = { noDataStyle } > No subscriptions match your filters. < /p>
         )
@@ -90,10 +106,7 @@ const Dashboard = () => {
 
 export default Dashboard;
 
-
-
-
-
+// Styles
 const containerStyle = {
     padding: '20px',
     maxWidth: '1000px',
@@ -112,7 +125,15 @@ const headerStyle = {
     marginBottom: '30px',
 };
 
-const filterContainer = {
+const chartContainer = {
+    marginBottom: '30px',
+    backgroundColor: '#f5f5f5',
+    padding: '20px',
+    borderRadius: '10px',
+    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
+};
+
+const filterSection = {
     display: 'flex',
     flexWrap: 'wrap',
     gap: '10px',
@@ -133,12 +154,4 @@ const noDataStyle = {
     backgroundColor: '#fce4ec',
     borderRadius: '8px',
     color: '#b71c1c',
-};
-
-const chartSectionStyle = {
-    marginBottom: '30px',
-    backgroundColor: '#f5f5f5',
-    padding: '20px',
-    borderRadius: '10px',
-    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
 };
