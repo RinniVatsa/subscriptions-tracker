@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSubscriptions } from '../../ context/SubscriptionContext';
-
+import { v4 as uuidv4 } from 'uuid';
 const SubscriptionForm = () => {
     const { addSubscription } = useSubscriptions();
     const [isHovered, setIsHovered] = useState(false);
@@ -19,20 +19,14 @@ const SubscriptionForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        addSubscription({
-            id: Date.now().toString(),
+        const newSub = {
             ...form,
+            id: uuidv4(), // ✅ give each item a unique ID
             amount: parseFloat(form.amount),
-        });
-        setForm({
-            name: '',
-            amount: '',
-            frequency: 'monthly',
-            nextPaymentDate: '',
-            category: '',
-        });
+        };
+        addSubscription(newSub);
+        setForm({ name: '', amount: '', frequency: 'monthly', nextPaymentDate: '', category: '' });
     };
-
 
     return ( <
         form onSubmit = { handleSubmit }

@@ -11,7 +11,7 @@ const App = () => {
         <
         Route path = "/login"
         element = { < Login / > }
-        /> { /* ✅ Add this route for /dashboard */ } <
+        />  <
         Route path = "/dashboard"
         element = { <
             PrivateRoute >
@@ -20,7 +20,7 @@ const App = () => {
             <
             /PrivateRoute>
         }
-        /> { /* Optionally redirect / to /dashboard */ } <
+        /> <
         Route path = "/"
         element = { <
             PrivateRoute >
@@ -29,8 +29,8 @@ const App = () => {
             <
             /PrivateRoute>
         }
-        /> <
-        /Routes>
+        /> < /
+        Routes >
     );
 };
 

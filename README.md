@@ -8,7 +8,10 @@ A responsive and user-friendly **Subscription Tracker App** built with React and
 
 -  **Firebase Authentication**
   - **Email & Password login**
+  -**Repeat GoogleUser SignUp**
   - **Google Sign-In**
+  - **Manual User addition on firebase**
+  - **Supports admin created user credentials login[Test Credentials - testemailid@gmail.com | testpassword]**
 -  **Add / Edit / Delete Subscriptions**
 -  **Track Next Payment Dates**
 -  **Category Filtering**
@@ -18,7 +21,7 @@ A responsive and user-friendly **Subscription Tracker App** built with React and
 
 ---
 
-## Tech uses
+## Tech usage
 
 - **Frontend:** React, CSS (Inline styling, Flexbox)
 - **Backend:** Firebase Authentication & Firestore
